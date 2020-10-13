@@ -206,12 +206,11 @@ class CupertinoSettingsItemState extends State<CupertinoSettingsItem> {
         );
         break;
     }
-
+    final hasAction = (widget.onPress != null || widget.onToggle != null);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
-        if ((widget.onPress != null || widget.onToggle != null) &&
-            widget.enabled) {
+        if (widget.enabled && hasAction) {
           setState(() {
             pressed = true;
           });
@@ -234,21 +233,21 @@ class CupertinoSettingsItemState extends State<CupertinoSettingsItem> {
         }
       },
       onTapUp: (_) {
-        if (widget.enabled) {
+        if (widget.enabled && hasAction) {
           setState(() {
             pressed = false;
           });
         }
       },
       onTapDown: (_) {
-        if (widget.enabled) {
+        if (widget.enabled && hasAction) {
           setState(() {
             pressed = true;
           });
         }
       },
       onTapCancel: () {
-        if (widget.enabled) {
+        if (widget.enabled && hasAction) {
           setState(() {
             pressed = false;
           });
